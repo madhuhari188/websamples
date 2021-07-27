@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Playing With CSS and JS</title>
+    </head>
+    <body>
+        <h2>Changing Css values with <span class="h1"> JS</span></h2>
+        <div class="controls">
+        <a>Blur</a>
+        <input type="range" name="blur" min="0" max="10" value="5"data-sizing="px">
+        <a>Spacing</a>
+        <input type="range" name="spacing" min="0" max="50" value="10" data-sizing="px">
+        <a>Color</a>
+        <input type="color" name="base" value="#FFDD00"><br>
+        <img src="https://cdn.pixabay.com/photo/2016/05/05/02/37/sunset-1373171__340.jpg"></div>
+    </body>
+    <style>
+        :root{
+            --base: #FFDD00;
+            --spacing: 10px;
+            --blur: 0px;
+        }
+        img{
+            padding: var(--spacing);
+            background: var(--base);
+            filter: blur(var(--blur));
+        }
+        .h1{
+            color: var(--base);
+        }
+        body{
+            text-align: center;
+            background: #193549;
+            color:aliceblue;
+            font-weight: 100;
+            font-size: 50px;
+        }
+        .controls{
+            margin-bottom: 50px;
+        }
+        input{
+            width: 100px;
+        }
+    </style>
+    <script>
+        const inputs = document.querySelectorAll('.controls input');
+        function handleupdate(){
+            const suffix = this.dataset.sizing || '';
+            document.documentElement.style.setProperty(`--${this.name}`,this.value+suffix);
+        }
+        inputs.forEach(input => input.addEventListener('change',handleupdate));
+        inputs.forEach(input => input.addEventListener('mousemove',handleupdate));
+            
+        
+    </script>
+</html>
